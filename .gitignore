@@ -1,0 +1,9 @@
+node_modules/
+canteen.db
+test-api.js
+.env
+*.log
+# Old root-level frontend files (active versions are in public/)
+/app.js
+/index.html
+/style.css

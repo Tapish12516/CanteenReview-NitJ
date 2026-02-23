@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Canteen — Fresh Food, Happy Vibes</title>
+    <meta name="description"
+        content="Browse our delicious canteen menu, read reviews, and order your favorites. Fresh food made daily for students and staff.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#menu" class="nav-logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">Review our<span class="logo-highlight"> Campus Canteens</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#menu" class="nav-link active" data-page="menu" id="nav-menu">
+                    <span class="nav-icon">📋</span> Menu
+                </a>
+                <a href="#compare" class="nav-link" data-page="compare" id="nav-compare">
+                    <span class="nav-icon">⚖️</span> Compare
+                </a>
+                <a href="#portal" class="nav-link" data-page="portal" id="nav-portal">
+                    <span class="nav-icon">👤</span> <span id="nav-portal-text">Login</span>
+                </a>
+                <a href="#admin" class="nav-link" data-page="admin" id="nav-admin">
+                    <span class="nav-icon">⚙️</span> Admin
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Delicious Food,<br>
+                <span class="hero-highlight">Made Fresh Daily</span>
+            </h1>
+            <p class="hero-subtitle">Browse our menu, read reviews, and discover your new favorite campus meal.</p>
+            <a href="#menu" class="hero-btn" id="hero-explore-btn">Explore Menu ↓</a>
+        </div>
+        <div class="hero-particles" id="hero-particles"></div>
+    </section>
+
+    <!-- ===== MENU PAGE ===== -->
+    <main class="page" id="page-menu">
+        <div class="container">
+            <div class="menu-header">
+                <h2 class="section-title">Our <span class="text-gradient">Menu</span></h2>
+                <p class="section-subtitle">Select a canteen and click any item to see details and reviews</p>
+            </div>
+
+            <!-- Canteen Selector -->
+            <div class="canteen-selector" id="canteen-selector"></div>
+
+            <div class="filter-bar" id="filter-bar">
+                <div class="search-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search for food..."
+                        autocomplete="off">
+                </div>
+                <div class="category-filters" id="category-filters">
+                    <button class="cat-btn active" data-category="all">All</button>
+                    <button class="cat-btn" data-category="beverages">☕ Beverages</button>
+                    <button class="cat-btn" data-category="paratha">🫓 Paratha</button>
+                    <button class="cat-btn" data-category="snacks">🍟 Snacks</button>
+                    <button class="cat-btn" data-category="maggi">🍜 Maggi</button>
+                    <button class="cat-btn" data-category="sandwich">🥪 Sandwich</button>
+                    <button class="cat-btn" data-category="meals">🍛 Meals</button>
+                </div>
+            </div>
+
+            <div class="food-grid" id="food-grid"></div>
+            <div class="empty-state" id="empty-state" style="display:none;">
+                <span class="empty-icon">🔍</span>
+                <p>No items found. Try a different search or category.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== ITEM DETAIL PAGE ===== -->
+    <section class="page" id="page-detail" style="display:none;">
+        <div class="container">
+            <button class="back-btn" id="back-to-menu">← Back to Menu</button>
+            <div class="detail-layout detail-layout-text">
+                <div class="detail-info detail-info-full">
+                    <div class="detail-top-row">
+                        <div>
+                            <h2 class="detail-name" id="detail-name"></h2>
+                            <span class="detail-category-badge" id="detail-category"></span>
+                        </div>
+                        <button class="wishlist-btn-detail" id="detail-wishlist-btn" title="Add to Wishlist">♡</button>
+                    </div>
+                    <div class="detail-price" id="detail-price"></div>
+                    <div class="detail-rating" id="detail-rating"></div>
+                    <p class="detail-description" id="detail-description"></p>
+                    <div class="detail-canteen-badge" id="detail-canteen-badge"></div>
+                </div>
+            </div>
+
+            <div class="reviews-section">
+                <h3 class="reviews-title">Customer Reviews <span class="review-count" id="review-count"></span></h3>
+                <div class="review-form-card glass-card">
+                    <h4>Leave a Review</h4>
+                    <form id="review-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reviewer-name">Your Name</label>
+                                <input type="text" id="reviewer-name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <div class="star-rating-input" id="star-rating-input">
+                                    <span class="star-input" data-value="1">★</span>
+                                    <span class="star-input" data-value="2">★</span>
+                                    <span class="star-input" data-value="3">★</span>
+                                    <span class="star-input" data-value="4">★</span>
+                                    <span class="star-input" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="review-rating" value="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-comment">Your Review</label>
+                            <textarea id="review-comment" rows="3" placeholder="Tell us about your experience..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submit-review-btn">Submit Review</button>
+                    </form>
+                </div>
+                <div class="review-list" id="review-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMPARE PAGE ===== -->
+    <section class="page" id="page-compare" style="display:none;">
+        <div class="container">
+            <div class="compare-header">
+                <h2 class="section-title">⚖️ Compare Across Canteens</h2>
+                <p class="compare-subtitle">Select a dish to compare its price and ratings at all canteens.</p>
+            </div>
+            <div class="compare-search-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="compare-search" class="search-input" placeholder="Search for a dish..."
+                    autocomplete="off">
+            </div>
+            <div class="compare-grid" id="compare-grid"></div>
+            <div class="compare-empty" id="compare-empty" style="display:none;">
+                <span class="empty-icon">🔍</span>
+                <p>No matching items found.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== USER PORTAL PAGE ===== -->
+    <section class="page" id="page-portal" style="display:none;">
+        <div class="container">
+            <!-- User Login -->
+            <div class="user-login-card glass-card" id="user-login-card">
+                <div class="admin-login-icon">🎓</div>
+                <h2>Student Login</h2>
+                <p>Login with your Roll Number and password to access your portal.</p>
+                <form id="user-login-form">
+                    <div class="form-group">
+                        <label for="user-rollno">Roll Number</label>
+                        <input type="text" id="user-rollno" placeholder="e.g. 2024CS101" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Password</label>
+                        <input type="password" id="user-password" placeholder="Password" required>
+                    </div>
+                    <div class="login-error" id="user-login-error" style="display:none;">Invalid roll number or
+                        password.</div>
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+                <div class="signup-link">
+                    Don't have an account? <a href="#" id="show-signup-btn">Sign Up</a>
+                </div>
+            </div>
+
+            <!-- User Signup -->
+            <div class="user-login-card glass-card" id="user-signup-card" style="display:none;">
+                <div class="admin-login-icon">📝</div>
+                <h2>Create Account</h2>
+                <p>Register with your details to get started.</p>
+                <form id="user-signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="e.g. Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-rollno">Roll Number</label>
+                        <input type="text" id="signup-rollno" placeholder="e.g. 2024CS101" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                    </div>
+                    <div class="login-error" id="signup-error" style="display:none;"></div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+                <div class="signup-link">
+                    Already have an account? <a href="#" id="show-login-btn">Login</a>
+                </div>
+            </div>
+
+            <!-- User Dashboard -->
+            <div class="user-dashboard" id="user-dashboard" style="display:none;">
+                <div class="admin-header">
+                    <div>
+                        <h2 class="section-title">Welcome, <span class="text-gradient"
+                                id="user-greeting-name">Student</span></h2>
+                        <p class="section-subtitle" id="user-rollno-display"></p>
+                    </div>
+                    <div class="admin-actions">
+                        <button class="btn btn-outline" id="user-logout-btn">Logout</button>
+                    </div>
+                </div>
+
+                <!-- User Portal Tabs -->
+                <div class="portal-tabs">
+                    <button class="portal-tab active" data-tab="wishlist" id="tab-wishlist">❤️ My Wishlist</button>
+                    <button class="portal-tab" data-tab="feedback" id="tab-feedback">💬 Canteen Feedback</button>
+                </div>
+
+                <!-- Wishlist Tab -->
+                <div class="portal-tab-content" id="tab-content-wishlist">
+                    <div class="wishlist-grid" id="wishlist-grid"></div>
+                    <div class="empty-state" id="wishlist-empty" style="display:none;">
+                        <span class="empty-icon">❤️</span>
+                        <p>Your wishlist is empty. Browse the menu and add your favorites!</p>
+                        <a href="#menu" class="btn btn-primary" style="margin-top:16px;">Browse Menu</a>
+                    </div>
+                </div>
+
+                <!-- Feedback Tab -->
+                <div class="portal-tab-content" id="tab-content-feedback" style="display:none;">
+                    <div class="review-form-card glass-card" style="margin-bottom:32px;">
+                        <h4>Share Your Feedback About the Canteen</h4>
+                        <form id="feedback-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Overall Rating</label>
+                                    <div class="star-rating-input" id="feedback-star-input">
+                                        <span class="star-input" data-value="1">★</span>
+                                        <span class="star-input" data-value="2">★</span>
+                                        <span class="star-input" data-value="3">★</span>
+                                        <span class="star-input" data-value="4">★</span>
+                                        <span class="star-input" data-value="5">★</span>
+                                    </div>
+                                    <input type="hidden" id="feedback-rating" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="feedback-topic">Topic</label>
+                                    <select id="feedback-topic" required>
+                                        <option value="">Select Topic</option>
+                                        <option value="food_quality">Food Quality</option>
+                                        <option value="hygiene">Hygiene & Cleanliness</option>
+                                        <option value="service">Service Speed</option>
+                                        <option value="pricing">Pricing</option>
+                                        <option value="variety">Menu Variety</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="feedback-message">Your Feedback</label>
+                                <textarea id="feedback-message" rows="4" placeholder="Tell us how we can improve..."
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                        </form>
+                    </div>
+                    <h4 style="margin-bottom:16px; color: var(--text-secondary);">Your Previous Feedback</h4>
+                    <div class="review-list" id="user-feedback-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ADMIN PAGE ===== -->
+    <section class="page" id="page-admin" style="display:none;">
+        <div class="container">
+            <div class="admin-login-card glass-card" id="admin-login-card">
+                <div class="admin-login-icon">🔐</div>
+                <h2>Admin Login</h2>
+                <p>Enter your credentials to manage the canteen menu.</p>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-username">Username</label>
+                        <input type="text" id="admin-username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" placeholder="Password" required>
+                    </div>
+                    <div class="login-error" id="login-error" style="display:none;">Invalid username or password.</div>
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+            </div>
+
+            <div class="admin-dashboard" id="admin-dashboard" style="display:none;">
+                <div class="admin-header">
+                    <h2 class="section-title">Admin <span class="text-gradient">Dashboard</span></h2>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="add-item-btn">+ Add New Item</button>
+                        <button class="btn btn-outline" id="admin-logout-btn">Logout</button>
+                    </div>
+                </div>
+
+                <div class="admin-stats" id="admin-stats">
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">🍕</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="stat-items">0</span>
+                            <span class="stat-label">Menu Items</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">⭐</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="stat-reviews">0</span>
+                            <span class="stat-label">Total Reviews</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">📂</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="stat-categories">0</span>
+                            <span class="stat-label">Categories</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">💬</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="stat-feedback">0</span>
+                            <span class="stat-label">Feedback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="portal-tabs">
+                    <button class="portal-tab active" data-admintab="items" id="admin-tab-items">🍕 Menu Items</button>
+                    <button class="portal-tab" data-admintab="feedback" id="admin-tab-feedback">💬 User
+                        Feedback</button>
+                </div>
+
+                <!-- Items Tab -->
+                <div class="admin-tab-content" id="admin-content-items">
+                    <div class="admin-table-wrap glass-card">
+                        <table class="admin-table" id="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price (₹)</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Feedback Tab -->
+                <div class="admin-tab-content" id="admin-content-feedback" style="display:none;">
+                    <div class="feedback-list" id="admin-feedback-list"></div>
+                    <div class="empty-state" id="admin-feedback-empty" style="display:none;">
+                        <span class="empty-icon">💬</span>
+                        <p>No feedback received yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ADD/EDIT ITEM MODAL ===== -->
+    <div class="modal-overlay" id="item-modal" style="display:none;">
+        <div class="modal glass-card">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Item</h3>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            <form id="item-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="item-name">Item Name</label>
+                        <input type="text" id="item-name" placeholder="e.g. Chicken Biryani" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-category">Category</label>
+                        <select id="item-category" required>
+                            <option value="">Select Category</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="snacks">Snacks</option>
+                            <option value="beverages">Beverages</option>
+                            <option value="desserts">Desserts</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="item-price">Price (₹)</label>
+                    <input type="number" id="item-price" placeholder="e.g. 120" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-description">Description</label>
+                    <textarea id="item-description" rows="3" placeholder="A short description of this item..."
+                        required></textarea>
+                </div>
+                <input type="hidden" id="item-edit-id" value="">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="modal-cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="modal-save-btn">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== DELETE CONFIRM MODAL ===== -->
+    <div class="modal-overlay" id="delete-modal" style="display:none;">
+        <div class="modal glass-card modal-sm">
+            <div class="modal-header">
+                <h3>Delete Item</h3>
+                <button class="modal-close" id="delete-modal-close">&times;</button>
+            </div>
+            <p class="delete-msg">Are you sure you want to delete <strong id="delete-item-name"></strong>? This action
+                cannot be undone.</p>
+            <input type="hidden" id="delete-item-id" value="">
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="delete-cancel-btn">Cancel</button>
+                <button class="btn btn-danger" id="delete-confirm-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 CampusCanteen. Made with ❤️ for hungry students.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
